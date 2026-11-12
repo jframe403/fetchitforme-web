@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="referrer" content="no-referrer" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src https://*.supabase.co http://127.0.0.1:* http://localhost:*; form-action 'none'; base-uri 'none'" />
+  <title>Connect Fetch It</title>
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="stylesheet" href="./consent.css" />
+</head>
+<body>
+  <main id="app" class="card" hidden>
+    <header class="brand">
+      <img src="/apple-touch-icon.png" alt="" width="44" height="44" />
+      <div>
+        <div class="eyebrow">Fetch It</div>
+        <h1 id="title">Connect an app</h1>
+      </div>
+    </header>
+
+    <section id="loading" class="muted">Loading…</section>
+
+    <section id="signin" hidden>
+      <p class="muted">Sign in with the email you use in Fetch It. We'll email you a 6-digit code.</p>
+      <form id="email-form" novalidate>
+        <input id="email" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required />
+        <button id="send-code" type="submit">Email me a code</button>
+      </form>
+      <form id="code-form" hidden novalidate>
+        <p class="muted" id="code-sent"></p>
+        <input id="code" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]*" maxlength="10" placeholder="123456" required />
+        <button type="submit">Sign in</button>
+        <button type="button" id="resend" class="link">Send a new code</button>
+      </form>
+      <button type="button" id="use-password" class="link">Use a password instead</button>
+      <form id="password-form" hidden novalidate>
+        <input id="pw-email" type="email" autocomplete="email" placeholder="you@example.com" required />
+        <input id="password" type="password" autocomplete="current-password" placeholder="Password" required />
+        <button type="submit">Sign in</button>
+      </form>
+    </section>
+
+    <section id="consent" hidden>
+      <p><strong id="client-name">Grok</strong> wants to use your Fetch It lists.</p>
+      <ul class="perms">
+        <li>See your lists and what's on them (your private lists too)</li>
+        <li>Add items and check items off, as you</li>
+      </ul>
+      <p class="muted small">It can't delete anything, change lists, members or settings, or see photos. You can disconnect it any time in Fetch It: Settings → Connected apps.</p>
+      <p class="muted small">Signed in as <span id="who"></span>. <button type="button" id="switch" class="link inline">Not you?</button></p>
+      <p class="muted small" id="redirect-note"></p>
+      <p class="warn small" id="untrusted" hidden></p>
+      <div class="row">
+        <button type="button" id="deny" class="secondary">Deny</button>
+        <button type="button" id="approve">Allow</button>
+      </div>
+    </section>
+
+    <p id="error" class="error" role="alert" hidden></p>
+  </main>
+  <noscript>Fetch It needs JavaScript to connect apps.</noscript>
+  <script src="./config.js"></script>
+  <script src="./supabase.js"></script>
+  <script src="./consent.js"></script>
+</body>
+</html>
